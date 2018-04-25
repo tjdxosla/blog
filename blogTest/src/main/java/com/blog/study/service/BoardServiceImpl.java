@@ -70,7 +70,7 @@ public class BoardServiceImpl implements BoardService{
 		String currentUrl  = req.getRequestURL()+"";		
 
 		if(reffer.indexOf(currentUrl)==-1){
-			bHitUpdate(idx);	
+			bHitUpdate(idx);
 		}
 		
 		HashMap<String, Object>  viewMap= cleanStr(boardDao.view(idx));		
