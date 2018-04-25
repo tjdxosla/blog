@@ -14,4 +14,6 @@ public interface BoardService {
 
 	HashMap<String, Object> view(HttpServletRequest req);
 
+	int recommend(HttpServletRequest req);
+
 }

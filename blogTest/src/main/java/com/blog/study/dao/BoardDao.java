@@ -33,6 +33,22 @@ public class BoardDao {
 		// TODO Auto-generated method stub
 		sqlSession.update("board.bHitUpdate", idx);
 	}
+
+	public int recommend(HashMap<String, Object> recommend) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("board.recommend", recommend);
+	}
+
+	public int recommendCheck(HashMap<String, Object> recommend) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("board.recommendCheck", recommend);
+	}
+
+	public void recommendUpdate(String idx) {
+		// TODO Auto-generated method stub
+		
+		sqlSession.update("board.recommendUpdate", idx);
+	}
 	
 	
 

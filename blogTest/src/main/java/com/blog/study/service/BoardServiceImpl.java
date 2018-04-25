@@ -85,4 +85,24 @@ public class BoardServiceImpl implements BoardService{
 		boardDao.bHitUpdate(idx);	
 	}
 
+	@Override
+	public int recommend(HttpServletRequest req) {
+		// TODO Auto-generated method stub
+		
+		HashMap<String, Object> recommend = new HashMap<String, Object>();
+		recommend.put("userId", req.getParameter("userId"));
+		recommend.put("idx", req.getParameter("idx"));
+		
+		int result = 0;
+		int chkResult = boardDao.recommendCheck(recommend);
+		
+		if(chkResult<=0){
+			result = boardDao.recommend(recommend);
+			String idx = (String) recommend.get("idx");
+			boardDao.recommendUpdate(idx);
+		}
+
+		return result;
+	}
+
 }

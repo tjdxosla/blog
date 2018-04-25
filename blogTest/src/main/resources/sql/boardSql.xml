@@ -2,21 +2,43 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="board">
+
 	<insert id="write" parameterType="hashmap">
 		insert into board(bName, bTitle, message, member, bdate)
 		values(#{bName}, #{bTitle}, #{message}, #{member}, now())
 	</insert>
+	
 	<select id="lastList" resultType="hashmap">
 		select *
 		from board
 		order by idx desc
 	</select>
+	
 	<select id="view"  parameterType="String" resultType="hashmap">
 		select *
 		from board
 		where idx = #{idx}
 	</select>
+	
 	<update id="bHitUpdate" parameterType="String">
 		update board set bHit = bHit+1 where idx =#{idx}
+	</update>
+	
+	<insert id="recommend" parameterType="hashmap">
+		insert into userboard(user_idx, board_idx, recommend)
+		select (select idx from user where id = #{userId}), idx as'board_idx', 1
+		from board
+		where idx = #{idx}
+	</insert>
+	
+	<select id="recommendCheck" resultType="int" parameterType="hashmap">
+		select count(*)
+		from userboard
+		where user_idx = (select idx from user where id = #{userId})
+		and board_idx = #{idx}
+	</select>
+	
+	<update id="recommendUpdate" parameterType="String">
+		update board set recommend = (select count(*) from userboard where board_idx=#{idx})where idx=#{idx} 
 	</update>
 </mapper>

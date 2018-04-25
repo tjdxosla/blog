@@ -53,5 +53,15 @@ public class BoardController {
 		mav.setViewName("board/view");
 		return mav;
 	}
+	
+	@RequestMapping(value="board/recommend")
+	public ModelAndView recommend(HttpServletRequest req, HttpSession session, ModelAndView mav) {
+		
+		int recommendResult = boardService.recommend(req);
+		
+		mav.addObject("recommendResult", recommendResult);
+		mav.setViewName("board/recommend");
+		return mav;
+	}
 
 }
