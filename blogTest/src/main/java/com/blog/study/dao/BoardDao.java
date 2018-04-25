@@ -45,9 +45,13 @@ public class BoardDao {
 	}
 
 	public void recommendUpdate(String idx) {
-		// TODO Auto-generated method stub
-		
+		// TODO Auto-generated method stub		
 		sqlSession.update("board.recommendUpdate", idx);
+	}
+
+	public int delete(String idx) {
+		// TODO Auto-generated method stub
+		return sqlSession.delete("board.delete", idx);
 	}
 	
 	

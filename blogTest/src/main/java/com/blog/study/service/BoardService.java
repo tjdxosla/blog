@@ -16,4 +16,6 @@ public interface BoardService {
 
 	int recommend(HttpServletRequest req);
 
+	int delete(HttpServletRequest req);
+
 }

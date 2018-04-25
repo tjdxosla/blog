@@ -41,4 +41,8 @@
 	<update id="recommendUpdate" parameterType="String">
 		update board set recommend = (select count(*) from userboard where board_idx=#{idx})where idx=#{idx} 
 	</update>
+	
+	<delete id="delete" parameterType="String">
+		delete from board where idx=#{idx}
+	</delete>
 </mapper>

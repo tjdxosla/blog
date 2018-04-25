@@ -63,5 +63,16 @@ public class BoardController {
 		mav.setViewName("board/recommend");
 		return mav;
 	}
+	
+	@RequestMapping(value="board/delete")
+	public ModelAndView delete(HttpServletRequest req, HttpSession session, ModelAndView mav) {
+		
+		int result = boardService.delete(req);
+				
+		mav.addObject("result", result);
+		mav.setViewName("board/view");
+		
+		return mav;
+	}
 
 }

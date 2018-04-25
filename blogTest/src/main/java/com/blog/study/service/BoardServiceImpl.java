@@ -27,6 +27,18 @@ public class BoardServiceImpl implements BoardService{
 		String bTitle = req.getParameter("bTitle");
 		String message = req.getParameter("message");
 		
+		if(bName.length()>50){
+			bName = bName.substring(0, 50);
+		}
+		
+		if(bTitle.length()>50){
+			bTitle = message.substring(0, 50);
+		}		
+		
+		if(message.length()>250){
+			message = message.substring(0, 250);
+		}
+		
 		HTMLInputFilter hif = new HTMLInputFilter();
 		
 		String repBname = hif.htmlSpecialChars(bName);
@@ -53,7 +65,14 @@ public class BoardServiceImpl implements BoardService{
 		// TODO Auto-generated method stub
 		
 		String idx = req.getParameter("idx");
-		bHitUpdate(idx);
+		
+		String reffer = req.getHeader("referer");
+		String currentUrl  = req.getRequestURL()+"";		
+
+		if(reffer.indexOf(currentUrl)==-1){
+			bHitUpdate(idx);	
+		}
+		
 		HashMap<String, Object>  viewMap= cleanStr(boardDao.view(idx));		
 				
 		return boardDao.view(idx);
@@ -103,6 +122,15 @@ public class BoardServiceImpl implements BoardService{
 		}
 
 		return result;
+	}
+
+	@Override
+	public int delete(HttpServletRequest req) {
+		// TODO Auto-generated method stub
+		
+		String idx = req.getParameter("idx");		
+		
+		return boardDao.delete(idx);
 	}
 
 }

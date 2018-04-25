@@ -16,12 +16,5 @@
 		</div>			
 	</c:otherwise>
 </c:choose>
-
-
-
-
-<c:if test="">
-
-</c:if>
 </body>
 </html>
