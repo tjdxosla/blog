@@ -10,7 +10,7 @@ public interface BoardService {
 
 	int write(HttpServletRequest req);
 
-	List<HashMap<String, Object>> lastList();
+	List<HashMap<String, Object>> lastList(int offset, int i);
 
 	HashMap<String, Object> view(HttpServletRequest req);
 
@@ -18,4 +18,9 @@ public interface BoardService {
 
 	int delete(HttpServletRequest req);
 
+	int count();
+
+	List<HashMap<String, Object>> bestList(int offset, int maxPost);
+
+	int bestCount();
 }

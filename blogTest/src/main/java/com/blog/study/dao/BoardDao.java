@@ -19,9 +19,9 @@ public class BoardDao {
 		return sqlSession.insert("board.write", writeMap);
 	}
 
-	public List<HashMap<String, Object>> lastList() {
+	public List<HashMap<String, Object>> lastList(HashMap<String, Object> listMap) {
 		// TODO Auto-generated method stub
-		return sqlSession.selectList("board.lastList");
+		return sqlSession.selectList("board.lastList", listMap);
 	}
 
 	public HashMap<String, Object> view(String idx) {
@@ -52,6 +52,21 @@ public class BoardDao {
 	public int delete(String idx) {
 		// TODO Auto-generated method stub
 		return sqlSession.delete("board.delete", idx);
+	}
+
+	public int count() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("board.count");
+	}
+
+	public List<HashMap<String, Object>> bestList(HashMap<String, Object> bestMap) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("board.bestList", bestMap);
+	}
+
+	public int bestCount() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("board.bestCount");
 	}
 	
 	

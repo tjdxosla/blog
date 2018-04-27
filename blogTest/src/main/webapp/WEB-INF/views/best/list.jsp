@@ -13,13 +13,13 @@
 			<th>추천</th>
 		</tr>
 		<c:choose>
-			<c:when test="${lastMap eq null}">
+			<c:when test="${bestMap eq null}">
 				<tr class="text-center">
 					<td colspan="6">작성된 게시글이 존재 하지 않습니다.</td>
 				</tr>			
 			</c:when>
 			<c:otherwise>
-				<c:forEach var="list" items="${lastMap }">
+				<c:forEach var="list" items="${bestMap }">
 					<tr>
 						<td>${list.idx }</td>
 						<td><a href="../board/view?idx=${list.idx }">${list.bTitle }</a></td>

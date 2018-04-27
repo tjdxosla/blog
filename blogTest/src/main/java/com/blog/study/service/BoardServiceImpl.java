@@ -26,38 +26,65 @@ public class BoardServiceImpl implements BoardService{
 		String bName = req.getParameter("bName");
 		String bTitle = req.getParameter("bTitle");
 		String message = req.getParameter("message");
+
+		String message1 = "";
+		String message2 = "";
+		String message3 = "";
+		
+		HashMap<String, Object> writeMap = new HashMap<String, Object>();
+		HTMLInputFilter hif = new HTMLInputFilter();
+		message = hif.htmlSpecialChars(message);
 		
 		if(bName.length()>50){
 			bName = bName.substring(0, 50);
 		}
 		
 		if(bTitle.length()>50){
-			bTitle = message.substring(0, 50);
-		}		
-		
-		if(message.length()>250){
-			message = message.substring(0, 250);
+			bTitle = bTitle.substring(0, 50);
 		}
 		
-		HTMLInputFilter hif = new HTMLInputFilter();
+		if(message.length()>250){
+			if(message.length()>250 && message.length()>500){
+				if(message.length()>500 && message.length()>=750){					
+					message1 = message.substring(0, 254);			//0-254
+					message2 = message.substring(255, 509);	//255-509
+					message3 = message.substring(510, 764);	//510-764
+				}				
+			}else{
+				message1 = message.substring(0, 254);
+				message2 = message.substring(255, message.length());
+			}
+		}else{
+			message1 = message.substring(0, message.length());
+		}
 		
 		String repBname = hif.htmlSpecialChars(bName);
 		String repBtitle = hif.htmlSpecialChars(bTitle);
-		String repMessage = hif.htmlSpecialChars(message);
 		
-		HashMap<String, Object> writeMap = new HashMap<String, Object>();
+		if(message2.length()!=0 && message3.length()!=0){
+			writeMap.put("message2", message2);
+			writeMap.put("message3", message3);
+		}else if(message2.length()!=0 && message3.length()==0){
+			writeMap.put("message2", message2);
+		}		
+		
 		writeMap.put("bName", repBname);
 		writeMap.put("bTitle", repBtitle);
-		writeMap.put("message", repMessage);
+		writeMap.put("message1", message1);
 		writeMap.put("member", req.getAttribute("member"));
 		
 		return boardDao.write(writeMap);
 	}
 
 	@Override
-	public List<HashMap<String, Object>> lastList() {
+	public List<HashMap<String, Object>> lastList(int offset, int i) {
 		// TODO Auto-generated method stub
-		return boardDao.lastList();
+		
+		HashMap<String, Object> listMap = new HashMap<String, Object>();
+		listMap.put("offset", offset);
+		listMap.put("maxPost", i);
+		listMap.put("recommend", 5);
+		return boardDao.lastList(listMap);
 	}
 
 	@Override
@@ -131,6 +158,28 @@ public class BoardServiceImpl implements BoardService{
 		String idx = req.getParameter("idx");		
 		
 		return boardDao.delete(idx);
+	}
+
+	@Override
+	public int count() {
+		// TODO Auto-generated method stub
+		return boardDao.count();
+	}
+
+	@Override
+	public List<HashMap<String, Object>> bestList(int offset, int maxPost) {
+		// TODO Auto-generated method stub
+		HashMap<String, Object> bestMap = new HashMap<String, Object>();
+		bestMap.put("offset", offset);
+		bestMap.put("maxPost", maxPost);
+		bestMap.put("recommend", 5);
+		return boardDao.bestList(bestMap);		
+	}
+
+	@Override
+	public int bestCount() {
+		// TODO Auto-generated method stub
+		return boardDao.bestCount();
 	}
 
 }

@@ -4,14 +4,18 @@
 <mapper namespace="board">
 
 	<insert id="write" parameterType="hashmap">
-		insert into board(bName, bTitle, message, member, bdate)
-		values(#{bName}, #{bTitle}, #{message}, #{member}, now())
+		insert into board(bName, bTitle, message, member, bdate, message2, message3)
+		values(#{bName}, #{bTitle}, #{message1}, #{member}, now(), #{message2}, #{message3})
 	</insert>
 	
-	<select id="lastList" resultType="hashmap">
+	<select id="lastList" resultType="hashmap" parameterType="hashmap">
+	<![CDATA[
 		select *
 		from board
-		order by idx desc
+		where recommend<${recommend}
+		order by idx desc		
+		limit #{offset}, #{maxPost}
+		]]>
 	</select>
 	
 	<select id="view"  parameterType="String" resultType="hashmap">
@@ -45,4 +49,23 @@
 	<delete id="delete" parameterType="String">
 		delete from board where idx=#{idx}
 	</delete>
+	
+	<select id="count" resultType="int">
+		select count(*)
+		from board
+	</select>
+	
+	<select id="bestList" parameterType="hashmap" resultType="hashmap">
+		select *
+		from board
+		where recommend>=${recommend}
+		order by idx desc
+		limit #{offset}, #{maxPost}
+	</select>
+	
+	<select id="bestCount" resultType="int">
+		select count(*)
+		from board
+		where recommend>=5
+	</select>
 </mapper>

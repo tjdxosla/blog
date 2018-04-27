@@ -28,7 +28,7 @@
 		</tr>
 		<tr>
 			<th rowspan="5">내용</th>
-			<td class="col-sm-9">${view.message }</td>
+			<td class="col-sm-9">${view.message }${view.message2 }${view.message3 }</td>
 		</tr>		
 	</table>
 	<div class="viewButton">
