@@ -27,8 +27,12 @@
 			<td class="col-sm-9">${view.bHit }</td>
 		</tr>
 		<tr>
-			<th rowspan="5">내용</th>
-			<td class="col-sm-9">${view.message }${view.message2 }${view.message3 }</td>
+			<th class="text-cener">내용</th>
+			<td class="col-sm-9">
+				<div class="form-group">				
+					<textarea class="form-control rounded-3" readOnly>${view.message }${view.message2 }${view.message3 }</textarea>
+				</div>
+			</td>
 		</tr>		
 	</table>
 	<div class="viewButton">

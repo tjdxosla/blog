@@ -17,7 +17,7 @@
 			<link rel="stylesheet" href="../resources/css/common.css">
 		</head>
 		<body>
-			<h1 class="text-center"><a href="/"><strong>st_kim의 BLOG</strong></a></h1>
+			<h1 class="text-center"><a href="/"><img src="../resources/img/logo1.JPG" alt=""></a></h1>
 			<nav class="navbar navbar-default">
 			  <div class="container-fluid">
 			    <!-- Brand and toggle get grouped for better mobile display -->
