@@ -30,7 +30,7 @@
 			<th class="text-cener">내용</th>
 			<td class="col-sm-9">
 				<div class="form-group">				
-					<textarea class="form-control rounded-3" readOnly>${view.message }${view.message2 }${view.message3 }</textarea>
+					<textarea class="form-control rounded-0" rows="5" readOnly>${view.message }${view.message2 }${view.message3 }</textarea>
 				</div>
 			</td>
 		</tr>		
